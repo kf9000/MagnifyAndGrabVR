@@ -6,11 +6,11 @@ public class ZoomCameraSync : MonoBehaviour
     public Transform lens;
     public Transform xrCam;
     public Transform lensCam;
-void Update() {
+    void LateUpdate() {
 
-    Vector3 viewDir = lens.position - xrCam.position;
+        Vector3 direction = lens.position - xrCam.position;
 
-    lensCam.transform.rotation = Quaternion.LookRotation(viewDir);
-}
+        lensCam.rotation = Quaternion.LookRotation(direction, Vector3.up);
+    }
 
 }
