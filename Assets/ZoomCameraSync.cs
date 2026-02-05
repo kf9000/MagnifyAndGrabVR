@@ -10,7 +10,7 @@ public class zoomCameraSync : MonoBehaviour
 
         Vector3 direction = lens.position - xrCam.position;
 
-        lensCam.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        lensCam.rotation = Quaternion.LookRotation(direction, lens.up);
     }
 
 }
