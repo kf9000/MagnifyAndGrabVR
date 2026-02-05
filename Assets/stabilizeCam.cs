@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class keepLensUp : MonoBehaviour
+public class stabilizeCam : MonoBehaviour
 {   
     void Update()
     {
