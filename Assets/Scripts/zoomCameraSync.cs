@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class zoomCameraSync : MonoBehaviour
+public class ZoomCameraSync : MonoBehaviour
 {
 
     public Transform lens;

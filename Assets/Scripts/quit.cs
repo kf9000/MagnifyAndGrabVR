@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class quit : MonoBehaviour
+public class Quit : MonoBehaviour
 {
     public InputActionReference action;
     void Start()
