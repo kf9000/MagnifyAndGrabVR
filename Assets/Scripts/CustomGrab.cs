@@ -12,7 +12,6 @@ public class CustomGrab : MonoBehaviour
     public Transform grabbedObject = null;
     public InputActionReference action;
     bool grabbing = false;
-
     Vector3 lastPosition;
     Quaternion lastRotation;
 
@@ -44,11 +43,13 @@ public class CustomGrab : MonoBehaviour
             {
                 // Change these to add the delta position and rotation instead
                 // Save the position and rotation at the end of Update function, so you can compare previous pos/rot to current here
-                Vector3 deltaPosition = transform.position - lastPosition;
                 Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(lastRotation);
 
-                grabbedObject.position += deltaPosition;
-                grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
+                Vector3 objectPosition = grabbedObject.position - lastPosition;
+
+                objectPosition = (deltaRotation * objectPosition) + transform.position;
+
+                grabbedObject.SetPositionAndRotation(objectPosition, deltaRotation * grabbedObject.rotation);
             }
         }
         // If let go of button, release object
