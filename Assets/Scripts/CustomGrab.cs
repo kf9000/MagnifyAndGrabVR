@@ -11,6 +11,8 @@ public class CustomGrab : MonoBehaviour
     public List<Transform> nearObjects = new List<Transform>();
     public Transform grabbedObject = null;
     public InputActionReference action;
+    public InputActionReference toggleRotationBuff;
+    bool doubleRotation = false;
     bool grabbing = false;
     Vector3 lastPosition;
     Quaternion lastRotation;
@@ -18,6 +20,12 @@ public class CustomGrab : MonoBehaviour
     private void Start()
     {
         action.action.Enable();
+        toggleRotationBuff.action.Enable();
+
+        toggleRotationBuff.action.performed += (ctx) =>
+        {
+            doubleRotation = !doubleRotation;
+        };
 
         // Find the other hand
         foreach(CustomGrab c in transform.parent.GetComponentsInChildren<CustomGrab>())
@@ -49,7 +57,14 @@ public class CustomGrab : MonoBehaviour
 
                 objectPosition = (deltaRotation * objectPosition) + transform.position;
 
-                grabbedObject.SetPositionAndRotation(objectPosition, deltaRotation * grabbedObject.rotation);
+                if (doubleRotation)
+                {
+                    deltaRotation *= deltaRotation;
+                }
+                Quaternion objectRotation = deltaRotation * grabbedObject.rotation;
+
+
+                grabbedObject.SetPositionAndRotation(objectPosition, objectRotation);
             }
         }
         // If let go of button, release object
