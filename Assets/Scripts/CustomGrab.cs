@@ -55,12 +55,13 @@ public class CustomGrab : MonoBehaviour
 
                 Vector3 objectPosition = grabbedObject.position - lastPosition;
 
-                objectPosition = (deltaRotation * objectPosition) + transform.position;
-
                 if (doubleRotation)
                 {
                     deltaRotation *= deltaRotation;
                 }
+
+                objectPosition = (deltaRotation * objectPosition) + transform.position;
+
                 Quaternion objectRotation = deltaRotation * grabbedObject.rotation;
 
 
